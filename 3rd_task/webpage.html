@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Gate Dashboard</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center font-sans">
+
+  <div class="bg-white shadow-2xl rounded-2xl p-8 w-[420px]">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">
+        Site Management Dashboard
+      </h1>
+
+      <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+    </div>
+
+    <!-- Gate Status Card -->
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-6">
+
+      <h2 class="text-lg font-semibold text-gray-700 mb-3">
+        Live Feed Status
+      </h2>
+
+      <p id="gateStatus"
+         class="text-2xl font-bold text-red-600 transition-all duration-300">
+         Gate Closed
+      </p>
+
+      <p class="text-sm text-gray-500 mt-2">
+        Ultrasonic sensor monitoring vehicle presence.
+      </p>
+    </div>
+
+    <!-- Sensor Information -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+
+      <div class="bg-blue-50 rounded-xl p-4 text-center">
+        <p class="text-sm text-gray-500">Sensor</p>
+        <p class="text-lg font-semibold text-blue-700">HC-SR04</p>
+      </div>
+
+      <div class="bg-purple-50 rounded-xl p-4 text-center">
+        <p class="text-sm text-gray-500">Gate Motor</p>
+        <p class="text-lg font-semibold text-purple-700">Servo Active</p>
+      </div>
+
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex gap-4">
+
+      <button onclick="triggerGate()"
+        class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition-all duration-300">
+        Simulate Vehicle
+      </button>
+
+      <button onclick="resetGate()"
+        class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-xl transition-all duration-300">
+        Reset
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const gateStatus = document.getElementById("gateStatus");
+
+    // Simulate ultrasonic sensor trigger
+    function triggerGate() {
+
+      gateStatus.innerText = "Gate Opening...";
+      gateStatus.classList.remove("text-red-600");
+      gateStatus.classList.add("text-yellow-500");
+
+      // Simulate gate opening delay
+      setTimeout(() => {
+
+        gateStatus.innerText = "Gate Open";
+        gateStatus.classList.remove("text-yellow-500");
+        gateStatus.classList.add("text-green-600");
+
+      }, 2000);
+    }
+
+    // Reset gate state
+    function resetGate() {
+
+      gateStatus.innerText = "Gate Closed";
+
+      gateStatus.classList.remove(
+        "text-yellow-500",
+        "text-green-600"
+      );
+
+      gateStatus.classList.add("text-red-600");
+    }
+
+  </script>
+
+</body>
+</html>
